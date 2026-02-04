@@ -82,6 +82,8 @@
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr filter select distinct mutate group_by summarise count n_distinct
 #' @importFrom tibble column_to_rownames
+#' @importFrom stats as.dendrogram
+#' @importFrom utils capture.output flush.console head
 #'
 #' @export
 make_gsea_jaccard_heatmap <- function(

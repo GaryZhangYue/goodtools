@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!--  use devtools::build_readme() to update -->
 
 # goodtools
 
@@ -13,7 +14,7 @@ The goal of goodtools is to …
 You can install the development version of goodtools like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+remotes::install_github("GaryZhangYue/goodtools")
 ```
 
 ## Example
@@ -22,29 +23,28 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(goodtools)
-## basic example code
+# res = make_gsea_jaccard_heatmap(df.full = df.full,
+#                           padj_cutoff = padj_cutoff,
+#                           threshold_positive = threshold_positive, threshold_negative = threshold_negative,
+#                           hclust_method = 'average',
+#                           hcut = hcut,
+#                           branch_palette = col21,
+#                           branches_lwd = 2,
+#                           row_split = row_split,
+#                           cluster_columns = F,
+#                           heatmap_width_cm = 2.5,   
+#                           row_dend_width_cm = 6,
+#                           row_label_fontsize = 6,
+#                           row_label_bold = TRUE,
+#                           row_names_max_width_cm = 20,
+#                           cell_border_col = "black",
+#                           cell_border_lwd = 0.4,
+#                           pdf_heatmap = paste0("NES_heatmap.monocyteL1.padj", padj_cutoff, ".pos", threshold_positive, 
+#                                                ".neg", threshold_negative, ".rowsplit_", row_split, ".hcut", hcut, ".goodtools.pdf"),
+#                           pdf_dendrogram = paste0("dendrogram.monocyteL1.padj", padj_cutoff, ".pos", threshold_positive, 
+#                                                   ".neg", threshold_negative, ".rowsplit_", row_split, ".hcut", hcut, ".goodtools.pdf"),
+#                           pdf_width = 12,
+#                           pdf_height = 9,
+#                           plot_dendrogram = TRUE,
+#                           show_progress = FALSE)
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
