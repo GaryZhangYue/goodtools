@@ -21,6 +21,9 @@ Imports:
     ComplexHeatmap,
     dendextend,
     dplyr,
+    ggplot2,
     grid,
+    patchwork,
+    rlang,
     tibble,
     tidyr
