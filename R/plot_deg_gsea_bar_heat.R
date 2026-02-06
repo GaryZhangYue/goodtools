@@ -266,6 +266,11 @@ plot_deg_gsea_bar_heat <- function(
   pathways_all <- mem |>
     dplyr$distinct(Pathway)
 
+  # rank the rows of heatmap so that the pathway has most genes stay on top
+  pathway_rank <- gsea_sub |>
+    dplyr$mutate(n_genes = lengths(genes)) |>
+    dplyr$arrange(n_genes)
+
   heat_df <- tidyr$expand_grid(
     Pathway = pathways_all$Pathway,
     Gene    = gene_key$Gene
@@ -273,6 +278,7 @@ plot_deg_gsea_bar_heat <- function(
     dplyr$left_join(mem,      by = c("Pathway", "Gene")) |>
     dplyr$left_join(gene_key, by = "Gene") |>
     dplyr$mutate(
+      Pathway      = factor(Pathway, levels = pathway_rank$Pathway),
       present      = tidyr$replace_na(present, 0L),
       present      = factor(present, levels = c(0, 1)),
       n_pathways_f = factor(n_pathways_f, levels = levels(bar_df$n_pathways_f)),
