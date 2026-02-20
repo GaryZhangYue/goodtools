@@ -324,6 +324,27 @@ make_gsea_jaccard_heatmap <- function(
   ComplexHeatmap::draw(hm)
   grDevices::dev.off()
 
+
+  # Add the cluster membership column to df so users can retrieve the pathways according to the cluster membership showing in the heatmap
+  if (!is.na(hcut)) {
+    # get the cluster membership and remap them to the order as showing in the plot above
+    # cluster membership (named vector)
+    cl <- cutree(hc, h = hcut)
+    # dendrogram order (from top to bottom as in the plot)
+    ord <- hc$labels[hc$order]
+
+    # clusters in first-appearance order # unique(c(5,5,2,2,1)) -> c(5,2,1)
+    cl_levels <- unique(cl[ord])
+
+    # remap cluster IDs
+    cl_ordered <- setNames(
+      match(cl, cl_levels), # matchc(2,2,5,5,1) to c(5,2,1)) -> get the order of each element in the first vector in the second vector c(2,2,1,1,3) to reorder
+      names(cl)
+    )
+    cl <- cl_ordered %>% as.matrix %>% as.data.frame() %>% transmute(Pathway = rownames(.),Cluster = V1)
+    df = merge(df,cl,by = 'Pathway',all.x = T)
+  }
+
   invisible(list(
     df = df,
     dmat = dmat,
